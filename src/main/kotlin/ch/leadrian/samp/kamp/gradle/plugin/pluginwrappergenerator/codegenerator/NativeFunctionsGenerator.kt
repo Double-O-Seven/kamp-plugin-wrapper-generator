@@ -62,6 +62,7 @@ internal class NativeFunctionsGenerator(
                         FunSpec
                                 .constructorBuilder()
                                 .addAnnotation(Inject::class.java)
+                                .addModifiers(KModifier.INTERNAL)
                                 .build()
                 )
                 .addProperties(amxNativeFunctionPropertySpecs)
