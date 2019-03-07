@@ -91,7 +91,7 @@ internal class NativeFunctionsGenerator(
         val args = mutableListOf<Any>(propertySpec)
         parameterSpecs.forEach { args.add(it) }
         format = when (nativeFunction.type) {
-            Types.VOID -> format
+            Types.VOID -> "$format; return 0"
             Types.INT -> "return $format"
             Types.BOOL -> "return $format != 0"
             Types.FLOAT -> "return Float.fromBits($format)"
