@@ -47,6 +47,7 @@ internal class ConstantsGenerator(
                             )
                     )
                     .addModifiers(KModifier.CONST)
+                    .initializer(constant.value.toString())
                     .build()
                     .let { addProperty(it) }
         }
