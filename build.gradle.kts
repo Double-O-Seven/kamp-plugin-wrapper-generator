@@ -27,9 +27,14 @@ repositories {
 }
 
 dependencies {
+    implementation(group = "ch.leadrian.samp.kamp", name = "cidl-kotlin", version = "1.0.0")
+    implementation(group = "ch.leadrian.samp.kamp", name = "kamp-annotations", version = "1.0.0-rc1")
+
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version = "1.3.11")
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.3.11")
     implementation(group = "com.squareup", name = "kotlinpoet", version = "1.1.0")
+    implementation(group = "com.google.guava", name = "guava", version = "27.0.1-jre")
+    implementation(group = "javax.inject", name = "javax.inject", version = "1")
 
     api(gradleApi())
 
