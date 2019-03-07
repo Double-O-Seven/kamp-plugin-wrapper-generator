@@ -93,7 +93,7 @@ internal class NativeFunctionsGenerator(
         format = when (nativeFunction.type) {
             Types.VOID -> "$format; return 0"
             Types.INT -> "return $format"
-            Types.BOOL -> "return $format != 0"
+            Types.BOOL -> "return $format!=0"
             Types.FLOAT -> "return Float.fromBits($format)"
             else -> throw IllegalArgumentException("Unsupported return type: ${nativeFunction.type}")
         }
