@@ -124,10 +124,10 @@ internal class CallbackManagerGenerator(
             callback.parameters.isNotEmpty() -> "$lambdaParameters -> %N.$callbackName($lambdaParameters)"
             else -> "%N.$callbackName()"
         }
-        if (callback.type == Types.BOOL) {
-            statement = "$statement.let { result -> if (result) 1 else 0 }"
-        } else if (callback.type != Types.INT) {
-            throw IllegalArgumentException("Unsupported callback return type: ${callback.type}")
+        when {
+            callback.type == Types.BOOL -> statement = "$statement.let { result -> if (result) 1 else 0 }"
+            callback.type == Types.VOID -> statement = "$statement; 0"
+            callback.type != Types.INT -> throw IllegalArgumentException("Unsupported callback return type: ${callback.type}")
         }
         addStatement(statement, callbacksInterfacePropertySpec)
     }
