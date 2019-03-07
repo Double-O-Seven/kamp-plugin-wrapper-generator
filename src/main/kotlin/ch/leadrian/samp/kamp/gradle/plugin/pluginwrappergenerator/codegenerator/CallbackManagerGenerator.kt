@@ -109,7 +109,7 @@ internal class CallbackManagerGenerator(
             initializeSpec
                     .beginControlFlow(
                             "%N.create${callback.parameters.size}(%S)",
-                            amxCallbackFactoryClass,
+                            amxCallbackFactoryPropertySpec,
                             callback.name
                     )
                     .addStatement(statement, callbacksInterfacePropertySpec)
