@@ -1,6 +1,7 @@
 package ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.codegenerator
 
 import ch.leadrian.samp.kamp.cidl.model.Constant
+import ch.leadrian.samp.kamp.cidl.model.Types
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.PluginWrapperGeneratorExtension
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.addGeneratedAnnotation
 import com.squareup.kotlinpoet.FileSpec
@@ -39,6 +40,10 @@ internal class ConstantsGenerator(
 
     private fun TypeSpec.Builder.addConstantProperties(): TypeSpec.Builder {
         constants.forEach { constant ->
+            val initializer = when (constant.type) {
+                Types.FLOAT -> constant.value.data + "f"
+                else -> constant.value.data
+            }
             PropertySpec
                     .builder(
                             constant.name,
@@ -47,7 +52,7 @@ internal class ConstantsGenerator(
                             )
                     )
                     .addModifiers(KModifier.CONST)
-                    .initializer(constant.value.data)
+                    .initializer(initializer)
                     .build()
                     .let { addProperty(it) }
         }
