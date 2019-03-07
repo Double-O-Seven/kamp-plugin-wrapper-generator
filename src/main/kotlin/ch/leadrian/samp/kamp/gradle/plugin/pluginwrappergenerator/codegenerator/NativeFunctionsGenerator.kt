@@ -39,7 +39,7 @@ internal class NativeFunctionsGenerator(
             PropertySpec
                     .builder(nativeFunction.name, parameterizedType)
                     .addModifiers(KModifier.PRIVATE)
-                    .delegate("%N()", parameterizedType)
+                    .delegate("%T()", parameterizedType)
                     .build()
         }
     }
