@@ -4,6 +4,7 @@ import ch.leadrian.samp.kamp.cidl.model.Function
 import ch.leadrian.samp.kamp.cidl.model.Types
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.PluginWrapperGeneratorExtension
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.addGeneratedAnnotation
+import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.kotlinType
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.transformName
 import com.google.common.base.CaseFormat.LOWER_CAMEL
 import com.google.common.base.CaseFormat.UPPER_CAMEL
@@ -95,27 +96,40 @@ internal class CallbackManagerGenerator(
                 .builder("initialize")
                 .addAnnotation(PostConstruct::class)
         callbacks.forEach { callback ->
-            val lambdaParameters = callback.parameters.joinToString(", ") { it.name }
-            val callbackName = callback.transformName(extension.callbacksCaseFormat, extension.prefixesToRemove)
-            var statement = when {
-                callback.parameters.isNotEmpty() -> "$lambdaParameters -> %N.$callbackName($lambdaParameters)"
-                else -> "%N.$callbackName()"
-            }
-            if (callback.type == Types.BOOL) {
-                statement = "$statement.let { result -> if (result) 1 else 0 }"
-            } else if (callback.type != Types.INT) {
-                throw IllegalArgumentException("Unsupported callback return type: ${callback.type}")
-            }
-            initializeSpec
-                    .beginControlFlow(
-                            "%N.create${callback.parameters.size}(%S)",
-                            amxCallbackFactoryPropertySpec,
-                            callback.name
-                    )
-                    .addStatement(statement, callbacksInterfacePropertySpec)
-                    .endControlFlow()
+            initializeSpec.addCallbackCreation(callback)
         }
         return addFunction(initializeSpec.build())
+    }
+
+    private fun FunSpec.Builder.addCallbackCreation(callback: Function) {
+        val format = when {
+            callback.parameters.isNotEmpty() -> {
+                val parameterization = callback.parameters.joinToString(", ") { "%T" }
+                "%N.create${callback.parameters.size}<$parameterization>(%S)"
+            }
+            else -> "%N.create0(%S)"
+        }
+        val args = mutableListOf<Any>(amxCallbackFactoryPropertySpec)
+        callback.parameters.forEach { args.add(it.kotlinType) }
+        args.add(callback.name)
+        beginControlFlow(format, *args.toTypedArray())
+        addCallbackInvocationStatement(callback)
+        endControlFlow()
+    }
+
+    private fun FunSpec.Builder.addCallbackInvocationStatement(callback: Function) {
+        val lambdaParameters = callback.parameters.joinToString(", ") { it.name }
+        val callbackName = callback.transformName(extension.callbacksCaseFormat, extension.prefixesToRemove)
+        var statement = when {
+            callback.parameters.isNotEmpty() -> "$lambdaParameters -> %N.$callbackName($lambdaParameters)"
+            else -> "%N.$callbackName()"
+        }
+        if (callback.type == Types.BOOL) {
+            statement = "$statement.let { result -> if (result) 1 else 0 }"
+        } else if (callback.type != Types.INT) {
+            throw IllegalArgumentException("Unsupported callback return type: ${callback.type}")
+        }
+        addStatement(statement, callbacksInterfacePropertySpec)
     }
 
 }
