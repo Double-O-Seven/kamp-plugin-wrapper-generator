@@ -90,8 +90,12 @@ internal class NativeFunctionsGenerator(
         var format = "%N(" + parameterSpecs.joinToString(", ") { "%N" } + ")"
         val args = mutableListOf<Any>(propertySpec)
         parameterSpecs.forEach { args.add(it) }
-        if (nativeFunction.type != Types.VOID) {
-            format = "return $format"
+        format = when (nativeFunction.type) {
+            Types.VOID -> format
+            Types.INT -> "return $format"
+            Types.BOOL -> "return $format != 0"
+            Types.FLOAT -> "return Float.fromBits($format)"
+            else -> throw IllegalArgumentException("Unsupported return type: ${nativeFunction.type}")
         }
         nativeFunctionSpec.addStatement(format, *args.toTypedArray())
         return nativeFunctionSpec.build()
