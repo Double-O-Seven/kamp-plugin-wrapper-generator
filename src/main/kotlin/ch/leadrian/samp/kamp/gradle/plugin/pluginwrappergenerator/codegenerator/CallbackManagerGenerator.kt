@@ -67,7 +67,7 @@ internal class CallbackManagerGenerator(
 
     private fun FileSpec.Builder.addCallbackManagerClass(): FileSpec.Builder {
         val callsbacksInterfaceTypeSpec = TypeSpec
-                .interfaceBuilder(callbacksInterfaceClass)
+                .classBuilder(callbackManagerClassName)
                 .addGeneratedAnnotation(CallbackManagerGenerator::class)
                 .addConstructor()
                 .addInitializeFunction()
