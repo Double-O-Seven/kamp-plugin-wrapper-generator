@@ -58,53 +58,67 @@ constructor(private val fileLookup: FileLookup) : DefaultTask() {
                 .resolve(extension.packageName.replace('.', File.separatorChar))
     }
 
-    private val callbackManagerGenerator: CallbackManagerGenerator by lazy {
-        CallbackManagerGenerator(
-                callbacks,
-                extension,
-                generatedSourceDirectory
-        )
+    private val callbackManagerGenerator: CallbackManagerGenerator? by lazy {
+        when {
+            callbacks.isNotEmpty() -> CallbackManagerGenerator(
+                    callbacks,
+                    extension,
+                    generatedSourceDirectory
+            )
+            else -> null
+        }
     }
 
-    private val callbacksInterfaceGenerator: CallbacksInterfaceGenerator by lazy {
-        CallbacksInterfaceGenerator(
-                callbacks,
-                extension,
-                generatedSourceDirectory
-        )
+    private val callbacksInterfaceGenerator: CallbacksInterfaceGenerator? by lazy {
+        when {
+            callbacks.isNotEmpty() -> CallbacksInterfaceGenerator(
+                    callbacks,
+                    extension,
+                    generatedSourceDirectory
+            )
+            else -> null
+        }
     }
 
-    private val constantsGenerator: ConstantsGenerator by lazy {
-        ConstantsGenerator(
-                interfaceDefinition.constants,
-                extension,
-                generatedSourceDirectory
-        )
+    private val constantsGenerator: ConstantsGenerator? by lazy {
+        when {
+            interfaceDefinition.constants.isNotEmpty() -> ConstantsGenerator(
+                    interfaceDefinition.constants,
+                    extension,
+                    generatedSourceDirectory
+            )
+            else -> null
+        }
     }
 
-    private val nativeFunctionsGenerator: NativeFunctionsGenerator by lazy {
-        NativeFunctionsGenerator(
-                nativeFunctions,
-                extension,
-                generatedSourceDirectory
-        )
+    private val nativeFunctionsGenerator: NativeFunctionsGenerator? by lazy {
+        when {
+            nativeFunctions.isNotEmpty() ->
+                NativeFunctionsGenerator(
+                        nativeFunctions,
+                        extension,
+                        generatedSourceDirectory
+                )
+            else -> null
+        }
     }
 
     @OutputFiles
-    fun getOutputFiles(): List<Path> =
-            listOf(
-                    callbackManagerGenerator.outputFile,
-                    callbacksInterfaceGenerator.outputFile,
-                    constantsGenerator.outputFile,
-                    nativeFunctionsGenerator.outputFile
-            )
+    fun getOutputFiles(): List<Path> {
+        val outputFiles = mutableListOf<Path>()
+        callbackManagerGenerator?.outputFile?.let { outputFiles.add(it) }
+        callbacksInterfaceGenerator?.outputFile?.let { outputFiles.add(it) }
+        constantsGenerator?.outputFile?.let { outputFiles.add(it) }
+        nativeFunctionsGenerator?.outputFile?.let { outputFiles.add(it) }
+        return outputFiles
+    }
 
     @TaskAction
     fun generatePluginWrapper() {
-        callbackManagerGenerator.generate()
-        callbacksInterfaceGenerator.generate()
-        constantsGenerator.generate()
-        nativeFunctionsGenerator.generate()
+        callbackManagerGenerator?.generate()
+        callbacksInterfaceGenerator?.generate()
+        constantsGenerator?.generate()
+        nativeFunctionsGenerator?.generate()
     }
 
 }
