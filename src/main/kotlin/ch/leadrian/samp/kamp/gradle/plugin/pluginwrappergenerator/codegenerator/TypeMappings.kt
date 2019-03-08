@@ -21,6 +21,7 @@ private val KOTLIN_TYPE_MAPPING: Map<String, ClassName> = mapOf(
 private val KOTLIN_OUT_TYPE_MAPPING: Map<String, ClassName> = mapOf(
         Types.FLOAT to ClassName("ch.leadrian.samp.kamp.core.api.amx", "MutableFloatCell"),
         Types.INT to ClassName("ch.leadrian.samp.kamp.core.api.amx", "MutableIntCell"),
+        Types.BOOL to ClassName("ch.leadrian.samp.kamp.core.api.amx", "MutableBooleanCell"),
         Types.STRING to ClassName("ch.leadrian.samp.kamp.core.api.amx", "OutputString")
 )
 
