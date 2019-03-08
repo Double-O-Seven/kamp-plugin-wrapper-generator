@@ -28,7 +28,7 @@ repositories {
 
 dependencies {
     implementation(group = "ch.leadrian.samp.kamp", name = "cidl-kotlin", version = "1.0.0")
-    implementation(group = "ch.leadrian.samp.kamp", name = "kamp-annotations", version = "1.0.0-rc1")
+    implementation(group = "ch.leadrian.samp.kamp", name = "kamp-annotations", version = "1.0.0-rc2")
 
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version = "1.3.11")
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version = "1.3.11")
