@@ -94,8 +94,8 @@ publishing {
             artifact(tasks["javadocJar"])
 
             pom {
-                name.set("Gradle plugin to generate Kotlin API for SA-MP native plugins")
-                description.set("")
+                name.set("Kamp Plugin Wrapper Generator")
+                description.set("Gradle plugin to generate Kotlin API for SA-MP native plugins")
                 url.set("https://github.com/Double-O-Seven/kamp-plugin-wrapper-generator")
                 licenses {
                     license {
