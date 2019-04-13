@@ -44,13 +44,9 @@ internal class ConstantsGenerator(
                 Types.FLOAT -> constant.value.data + "f"
                 else -> constant.value.data
             }
+            val name = extension.prefixesToRemove.fold(constant.name) { name, prefix -> name.removePrefix(prefix) }
             PropertySpec
-                    .builder(
-                            constant.name,
-                            getKotlinType(
-                                    constant.type
-                            )
-                    )
+                    .builder(name, getKotlinType(constant.type))
                     .addModifiers(KModifier.CONST)
                     .initializer(initializer)
                     .build()
