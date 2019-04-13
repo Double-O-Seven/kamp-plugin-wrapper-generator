@@ -3,6 +3,7 @@ package ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.codegenerator
 import ch.leadrian.samp.kamp.cidl.model.Function
 import ch.leadrian.samp.kamp.cidl.model.Types
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.PluginWrapperGeneratorExtension
+import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.addGeneratedAnnotation
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.kotlinType
 import ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.util.transformName
 import com.squareup.kotlinpoet.ClassName
@@ -57,6 +58,7 @@ internal class NativeFunctionsGenerator(
     private fun FileSpec.Builder.addNativeFunctionsClass(): FileSpec.Builder {
         val nativeFunctionsTypeSpec = TypeSpec
                 .classBuilder(nativeFunctionsClassName)
+                .addGeneratedAnnotation(NativeFunctionsGenerator::class)
                 .addAnnotation(Singleton::class.java)
                 .primaryConstructor(
                         FunSpec
