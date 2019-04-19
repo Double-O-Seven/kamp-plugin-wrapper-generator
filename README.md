@@ -15,7 +15,7 @@ The plugin provides a single task `generatePluginWrapper` which is configured by
 A minimal configuration will look like this:
 ```kotlin
 plugins {
-    id("kamp-plugin-wrapper-generator") version "1.0.0-rc1"
+    id("kamp-plugin-wrapper-generator") version "1.0.0-rc2"
 }
 
 pluginWrapperGenerator {
@@ -32,7 +32,7 @@ pluginWrapperGenerator {
 A complete configuration will look like this:
 ```kotlin
 plugins {
-    id("kamp-plugin-wrapper-generator") version "1.0.0-rc1"
+    id("kamp-plugin-wrapper-generator") version "1.0.0-rc2"
 }
 
 pluginWrapperGenerator {
