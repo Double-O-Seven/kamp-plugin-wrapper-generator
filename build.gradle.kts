@@ -14,16 +14,19 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.3.11"
     `java-library`
+    `java-gradle-plugin`
     `maven-publish`
     maven
     signing
     `build-scan`
+    id("com.gradle.plugin-publish") version "0.10.1"
     id("org.jetbrains.dokka") version "0.9.17"
     id("com.palantir.git-version") version "0.12.0-rc2"
 }
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -82,6 +85,28 @@ tasks {
 
     dokka {
         reportUndocumented = false
+    }
+}
+
+gradlePlugin {
+    plugins {
+        create("kampPluginWrapperGeneratorPlugin") {
+            id = "ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator"
+            implementationClass = "ch.leadrian.samp.kamp.gradle.plugin.pluginwrappergenerator.PluginWrapperGeneratorPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/Double-O-Seven/kamp-plugin-wrapper-generator"
+    vcsUrl = "https://github.com/Double-O-Seven/kamp-plugin-wrapper-generator"
+    description = "Gradle plugin to generate code base for SA-MP native plugin wrappers"
+    tags = listOf("samp")
+
+    (plugins) {
+        "kampPluginWrapperGeneratorPlugin" {
+            displayName = "Kamp Plugin Generator plugin"
+        }
     }
 }
 
