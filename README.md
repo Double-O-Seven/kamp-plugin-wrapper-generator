@@ -5,7 +5,7 @@
 
 This Gradle plugin allows you to to generate constants, callbacks and native functions for a Kamp Kotlin API wrapping a SA-MP native plugin.
 
-All you need to do, is provide a valid IDL file that can be parsed by (CIDL)[https://github.com/Zeex/cidl]. See (sampgdk)[https://github.com/Zeex/sampgdk/blob/master/lib/sampgdk/a_samp.idl] for example.
+All you need to do, is provide a valid IDL file that can be parsed by [CIDL](https://github.com/Zeex/cidl). See [sampgdk](https://github.com/Zeex/sampgdk/blob/master/lib/sampgdk/a_samp.idl) for example.
 
 Tasks and extensions
 --------------------
