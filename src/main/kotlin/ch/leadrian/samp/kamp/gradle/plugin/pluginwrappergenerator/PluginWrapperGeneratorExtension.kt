@@ -20,7 +20,7 @@ open class PluginWrapperGeneratorExtension {
         interfaceDefinitionFiles.addAll(values)
     }
 
-    fun interfaceDefintionFile(value: Any) {
+    fun interfaceDefinitionFile(value: Any) {
         interfaceDefinitionFiles.add(value)
     }
 
