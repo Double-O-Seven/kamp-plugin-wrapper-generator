@@ -1,16 +1,5 @@
 import groovy.lang.Closure
 
-buildscript {
-    dependencies {
-        repositories {
-            mavenCentral()
-            maven {
-                setUrl("https://plugins.gradle.org/m2/")
-            }
-        }
-    }
-}
-
 plugins {
     kotlin("jvm") version "1.3.11"
     `java-library`
@@ -26,7 +15,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
@@ -105,7 +93,7 @@ pluginBundle {
 
     (plugins) {
         "kampPluginWrapperGeneratorPlugin" {
-            displayName = "Kamp Plugin Generator plugin"
+            displayName = "Kamp Plugin Wrapper Generator plugin"
         }
     }
 }
