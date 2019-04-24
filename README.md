@@ -1,5 +1,5 @@
 ﻿[![Build Status](https://travis-ci.org/Double-O-Seven/kamp-plugin-wrapper-generator.svg?branch=master)](https://travis-ci.org/Double-O-Seven/kamp-plugin-wrapper-generator)
- [![Gradle Plugins Release](https://img.shields.io/github/release/Double-O-Seven/kamp-plugin-wrapper-generator.svg)](https://plugins.gradle.org/plugin/ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator)
+ [![Gradle Plugins Release](https://img.shields.io/github/tag/Double-O-Seven/kamp-plugin-wrapper-generator.svg)](https://plugins.gradle.org/plugin/ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator)
 
 # Kamp Native Plugin Wrapper Generator
 
