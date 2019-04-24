@@ -1,5 +1,5 @@
 ﻿[![Build Status](https://travis-ci.org/Double-O-Seven/kamp-plugin-wrapper-generator.svg?branch=master)](https://travis-ci.org/Double-O-Seven/kamp-plugin-wrapper-generator)
-[![Release Version](https://img.shields.io/maven-central/v/ch.leadrian.samp.kamp/kamp-plugin-wrapper-generator.svg?label=release)](http://search.maven.org/#search%7Cga%7C1%7Ckamp-plugin-wrapper-generator)
+ [![Gradle Plugins Release](https://img.shields.io/github/release/Double-O-Seven/kamp-plugin-wrapper-generator.svg)](https://plugins.gradle.org/plugin/ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator)
 
 # Kamp Native Plugin Wrapper Generator
 
@@ -15,7 +15,7 @@ The plugin provides a single task `generatePluginWrapper` which is configured by
 A minimal configuration will look like this:
 ```kotlin
 plugins {
-    id("ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator") version "1.0.0-rc2"
+    id("ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator") version "1.0.0-rc3"
 }
 
 pluginWrapperGenerator {
@@ -32,7 +32,7 @@ pluginWrapperGenerator {
 A complete configuration will look like this:
 ```kotlin
 plugins {
-    id("ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator") version "1.0.0-rc2"
+    id("ch.leadrian.samp.kamp.kamp-plugin-wrapper-generator") version "1.0.0-rc3"
 }
 
 pluginWrapperGenerator {
